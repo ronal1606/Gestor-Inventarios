@@ -6,7 +6,8 @@ services:
     env_file: .env
     depends_on:
       - db
-    networks: [app-net]
+    networks:
+      - app-net
 
   db:
     image: mysql:8.0
@@ -14,12 +15,13 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: inventario
-      MYSQL_ROOT_PASSWORD: CAMBIA_ESTA_ROOT
+      MYSQL_ROOT_PASSWORD: r123456
       MYSQL_USER: inventario
-      MYSQL_PASSWORD: CAMBIA_ESTA_PASS
+      MYSQL_PASSWORD: r123456
     volumes:
       - dbdata:/var/lib/mysql
-    networks: [app-net]
+    networks:
+      - app-net
 
   nginx:
     image: nginx:alpine
@@ -32,4 +34,13 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./:/var/www
-    networks: [app-net]
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
