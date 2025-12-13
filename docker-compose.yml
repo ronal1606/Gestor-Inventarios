@@ -1,7 +1,6 @@
 services:
   app:
     build: .
-    container_name: inventario_app
     restart: unless-stopped
     depends_on:
       - db
@@ -10,7 +9,6 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: inventario_db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: inventario
@@ -24,12 +22,9 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: inventario_nginx
     restart: unless-stopped
     depends_on:
       - app
-    ports:
-      - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./:/var/www
