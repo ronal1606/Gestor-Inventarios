@@ -7,7 +7,7 @@ use App\Models\AjusteInventario;
 use App\Observers\DetalleMovimientoObserver;
 use App\Observers\AjusteInventarioObserver;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL; // <--- AGREGUE ESTA LINEA IMPORTANTE
+use Illuminate\Support\Facades\URL; // <--- IMPRESCINDIBLE
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,13 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 1. TUS OBSERVADORES ORIGINALES (SE QUEDAN QUIETOS)
+        // Tus observadores (NO LOS BORRES)
         DetalleMovimiento::observe(DetalleMovimientoObserver::class);
         AjusteInventario::observe(AjusteInventarioObserver::class);
 
-        // 2. EL CODIGO NUEVO PARA FORZAR HTTPS (SE AGREGA AL FINAL)
-        if ($this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
+        // CODIGO DE FUERZA BRUTA PARA HTTPS
+        // (Sin if, sin preguntas, forzado directo)
+        URL::forceScheme('https');
     }
 }
