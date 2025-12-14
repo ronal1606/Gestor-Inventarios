@@ -14,7 +14,8 @@ services:
       DB_USERNAME: inventario
       DB_PASSWORD: inventario123
     volumes:
-      - web_root:/var/www/html
+      # CAMBIO 1: Nombre nuevo aqui
+      - web_root_final:/var/www/html
     depends_on:
       - db
 
@@ -35,15 +36,17 @@ services:
       context: .
       dockerfile: nginx.Dockerfile
     restart: always
-    # --- AQUI ESTA EL CAMBIO IMPORTANTE ---
     ports:
       - "8052:80"
-    # --------------------------------------
     expose:
       - "80"
+    volumes:
+      # CAMBIO 2: Nombre nuevo aqui tambien
+      - web_root_final:/var/www/html
     depends_on:
       - app
 
 volumes:
-  web_root:
+  # CAMBIO 3: Definir el volumen nuevo
+  web_root_final:
   dbdata:
