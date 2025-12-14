@@ -1,5 +1,14 @@
 <?php
 
+// --- HACK PARA CLOUDFLARE (SOLUCIÓN REDIRECCIONES) ---
+if (isset($_SERVER['HTTP_CF_VISITOR'])) {
+    if (strpos($_SERVER['HTTP_CF_VISITOR'], 'https') !== false) {
+        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['SERVER_PORT'] = 443;
+    }
+}
+// -----------------------------------------------------
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
