@@ -30,15 +30,13 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
 
-  proxy:
-    image: nginx:alpine
+ proxy:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
     restart: always
     expose:
       - "80"
-    volumes:
-      # 2. Montamos el MISMO volumen aquí para que Nginx vea los archivos
-      - web_root:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
 
