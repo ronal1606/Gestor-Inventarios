@@ -4,8 +4,8 @@ services:
     restart: always
     environment:
       APP_ENV: production
-      APP_DEBUG: "false"
-      APP_URL: ${APP_URL}
+      APP_DEBUG: "true"
+      APP_URL: "https://programin.bid"
       APP_KEY: "base64:dCfN8sKsjoRBcnwY7V7nzTwcsj7UjZYTp3b0Ao25n5I="
       DB_HOST: db
       DB_CONNECTION: mysql
