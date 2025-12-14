@@ -6,7 +6,7 @@ services:
       APP_ENV: production
       APP_DEBUG: "false"
       APP_URL: ${APP_URL}
-      APP_KEY: ${APP_KEY}
+      APP_KEY: "base64:dCfN8sKsjoRBcnwY7V7nzTwcsj7UjZYTp3b0Ao25n5I="
       DB_HOST: db
       DB_CONNECTION: mysql
       DB_DATABASE: inventario
