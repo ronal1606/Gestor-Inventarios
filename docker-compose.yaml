@@ -7,7 +7,6 @@ services:
       APP_DEBUG: "false"
       APP_URL: https://programin.bid
       APP_KEY: ${APP_KEY}
-      # ESTA LINEA ES LA QUE FALTABA:
       TRUSTED_PROXIES: "*"
       DB_HOST: db
       DB_CONNECTION: mysql
@@ -19,7 +18,6 @@ services:
     depends_on:
       - db
 
-  # (Deja el resto de los servicios db y proxy como estaban)
   db:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
@@ -37,7 +35,15 @@ services:
       context: .
       dockerfile: nginx.Dockerfile
     restart: always
+    # --- AQUI ESTA EL CAMBIO IMPORTANTE ---
+    ports:
+      - "8052:80"
+    # --------------------------------------
     expose:
       - "80"
     depends_on:
       - app
+
+volumes:
+  web_root:
+  dbdata:
